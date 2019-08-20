@@ -3,6 +3,7 @@ const path = require('path');
 const webpackBaseConfig = require("./webpack.common.config.js")
 
 module.exports = merge(webpackBaseConfig, {
+    mode: "development",
     devServer: {
         contentBase: path.join(__dirname, 'dist'),
         compress: true,
