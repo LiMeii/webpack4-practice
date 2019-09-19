@@ -4,27 +4,34 @@
 
 
 const https = require('https');
-import { getGitUser, countGitUser } from "./shared/getGitUser";
+import { getGitUser, countGitUser, cbGetGitUser } from './shared/getGitUser';
+
+// ----------------------------------
+// --------- callback start ---------
+// ----------------------------------
+cbGetGitUser("limeii");
+// ----------------------------------
+// --------- callback end ---------
+// ----------------------------------
 
 
 // ----------------------------------
 // ---- generator practice start ----
 // ----------------------------------
-function* gen() {
-    let value = yield getGitUser("limeii");
-    yield countGitUser({ total_count: 1233 });
-    console.log('DONE!!!');
-
+function* gen(value) {
+    var result1 = yield getGitUser(value);
+    yield countGitUser(result1);
 }
 
-var g = gen();
+var g = gen('limeii');
 g.next().value.then(data => {
     console.log('the first yeild: ' + data);
-}).then(
-    g.next().value.then((data) => {
+    return data;
+}).then(res => {
+    g.next(res).value.then((data) => {
         console.log('the second yeild: ' + data);
     })
-).catch((error) => {
+}).catch((error) => {
     console.log('has error: ' + error);
 })
 // --------------------------------
@@ -42,9 +49,7 @@ async function test() {
     console.log('the first await value ' + value1);
     console.log('the second await value ' + value2);
 }
-
 test();
-
 // ------------------------------------
 // ---- asycn await practice end ----
 // ------------------------------------
