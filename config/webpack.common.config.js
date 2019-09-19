@@ -3,12 +3,13 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+require("@babel/polyfill");
 
 module.exports = {
-    entry: "./src/main.js",
+    entry: ["@babel/polyfill", "./src/main.js"],
     output: {
         path: path.resolve(__dirname, "../dist"),
-        filename: "[name].[chunkhash].js"
+        filename: "[name].[hash].js"
     },
 
     module: {
