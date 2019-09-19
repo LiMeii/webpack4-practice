@@ -7,6 +7,9 @@ const https = require('https');
 import { getGitUser, countGitUser } from "./shared/getGitUser";
 
 
+// ----------------------------------
+// ---- generator practice start ----
+// ----------------------------------
 function* gen() {
     let value = yield getGitUser("limeii");
     yield countGitUser({ total_count: 1233 });
@@ -24,7 +27,14 @@ g.next().value.then(data => {
 ).catch((error) => {
     console.log('has error: ' + error);
 })
+// --------------------------------
+// ---- generator practice end ----
+// --------------------------------
 
+
+// ------------------------------------
+// ---- asycn await practice start ----
+// ------------------------------------
 async function test() {
     var value1 = await getGitUser("limeii");
     var value2 = await countGitUser(value1);
@@ -34,3 +44,7 @@ async function test() {
 }
 
 test();
+
+// ------------------------------------
+// ---- asycn await practice end ----
+// ------------------------------------
