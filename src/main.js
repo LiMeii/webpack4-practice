@@ -45,12 +45,12 @@ g.next().value.then(data => {
     console.log('the first yeild: ' + data);
     return data;
 }).then(res => {
-    g.next(res).value.then((data) => {
-        console.log('the second yeild: ' + data);
-    })
+    return g.next(res).value;
+}).then((data) => {
+    console.log('the second yeild: ' + data);
 }).catch((error) => {
     console.log('has error: ' + error);
-})
+});
 // --------------------------------
 // ---- generator practice end ----
 // --------------------------------
@@ -59,14 +59,14 @@ g.next().value.then(data => {
 // ------------------------------------
 // ---- asycn await practice start ----
 // ------------------------------------
-async function test() {
+async function asyncFuc() {
     var value1 = await getGitUser("limeii");
     var value2 = await countGitUser(value1);
 
     console.log('the first await value ' + value1);
     console.log('the second await value ' + value2);
 }
-test();
+asyncFuc();
 // ------------------------------------
 // ---- asycn await practice end ----
 // ------------------------------------
