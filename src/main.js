@@ -4,6 +4,7 @@
 
 
 const https = require('https');
+const co = require('co');
 import { getGitUser, countGitUser, cbGetGitUser } from './shared/getGitUser';
 
 // ----------------------------------
@@ -32,6 +33,8 @@ getGitUser('limeii').then(data => {
 // --------- promise end ------------
 // ----------------------------------
 
+
+
 // ----------------------------------
 // ---- generator practice start ----
 // ----------------------------------
@@ -54,6 +57,26 @@ g.next().value.then(data => {
 // --------------------------------
 // ---- generator practice end ----
 // --------------------------------
+
+
+
+
+// ----------------------------------
+// ---- co practice start ----
+// ----------------------------------
+
+function* gen_co(value) {
+    var result1 = yield getGitUser(value);
+    console.log('the first co ' + result1);
+    var result2 = yield countGitUser(result1);
+    console.log('the second co ' + result2);
+}
+co(gen_co('limeii'));
+// ----------------------------------
+// ---- co practice end ----
+// ----------------------------------
+
+
 
 
 // ------------------------------------
