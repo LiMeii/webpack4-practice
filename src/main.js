@@ -9,11 +9,28 @@ import { getGitUser, countGitUser, cbGetGitUser } from './shared/getGitUser';
 // ----------------------------------
 // --------- callback start ---------
 // ----------------------------------
-cbGetGitUser("limeii");
+cbGetGitUser('limeii');
 // ----------------------------------
 // --------- callback end ---------
 // ----------------------------------
 
+
+// ----------------------------------
+// --------- promise start ----------
+// ----------------------------------
+getGitUser('limeii').then(data => {
+    console.log('the first promise ' + data);
+    return data;
+}).then(res => {
+    return countGitUser(res);
+}).then(data => {
+    console.log('the second promise ' + data);
+}).catch(error => {
+    console.log('has error: ' + error);
+})
+// ----------------------------------
+// --------- promise end ------------
+// ----------------------------------
 
 // ----------------------------------
 // ---- generator practice start ----
